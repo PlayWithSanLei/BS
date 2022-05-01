@@ -10,8 +10,8 @@ class MyImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [],
-      image: [],
+      images: props.images,
+      image: props.image,
       size: 12,
       sizeOptions: ['12', '24', '50'],
       e: 1,
@@ -48,19 +48,6 @@ class MyImage extends React.Component {
   }
 
   componentDidMount() {
-    $.ajax({
-      url: '/meta/search/objects',
-      type: 'get'
-    }).then((res) => {
-      console.log(res)
-      res = res.filter(item => { return item.size > 0 })
-      this.setState({ image: res.slice(0, 12), images: res })
-    }).catch(err => {
-      err = [{"name":"123.jpg","version":4,"size":0,"hash":"","location":"","thumbnai":""},{"name":"response.png","version":2,"size":0,"hash":"","location":"","thumbnai":""},{"name":"123.png","version":2,"size":0,"hash":"","location":"","thumbnai":""},{"name":"text.png","version":19,"size":0,"hash":"","location":"","thumbnai":""},{"name":"response.jpeg","version":2,"size":0,"hash":"","location":"","thumbnai":""},{"name":"eason.jpeg","version":5,"size":878193,"hash":"QzWR4frhPznVL+E2s6JSlFvIAI1YIDHU75vNr1y7MMo=","location":"[123.1232,123.2323,12.3123,45.1231]","thumbnai":""},{"name":"mic.jpeg","version":9,"size":1001557,"hash":"wBE1U2izqcVsq0FJD5Er9KFcCGYx+VTNA/zzRvSFY6o=","location":"[123.1232,123.2323,12.3123,45.1231]","thumbnai":""},{"name":"test.png","version":2,"size":0,"hash":"","location":"","thumbnai":""}]
-      err = err.filter(item => { return item.size > 0 })
-      this.setState({ image: err.slice(0, 12), images: err })
-    })
-
   }
 
   componentDidUpdate() {
@@ -104,8 +91,8 @@ class MyImage extends React.Component {
     console.log('checked = ', checkedList)
     this.setState({
       checkedList: checkedList,
-      indeterminate: !!checkedList.length && (checkedList.length < this.state.image.length),
-      checkAll: checkedList.length === this.state.image.length
+      indeterminate: !!checkedList.length && (checkedList.length < this.props.image.length),
+      checkAll: checkedList.length === this.props.image.length
     })
   }
 
@@ -194,12 +181,12 @@ class MyImage extends React.Component {
       textAlign: 'center',
       display: 'inline-block'
     };
-    const { images, size, e } = this.state
+    const { size, e } = this.state
+    const images = this.props.images
     const image = images.slice((e - 1) * size, e * size)
     const control = image?.map?.((item, index) => {
       return (
         <div style={gridStyle}>
-
           <div>
             <Image src='http://101.43.156.185:9426/453f5cf4f247d6fb5380ca40e497113.png'
               preview={{
@@ -251,7 +238,7 @@ class MyImage extends React.Component {
     return (
       <div className='image-container'>
         <div className='wrapper'>
-          {this.state.images.length ? <div style={{ display: 'flex', alignItems: 'center' }}><Checkbox
+          {this.props.images.length ? <div style={{ display: 'flex', alignItems: 'center' }}><Checkbox
             className='myCheckbox'
             indeterminate={this.state.indeterminate}
             onChange={(e) => {
@@ -305,7 +292,7 @@ class MyImage extends React.Component {
         </div>
         <Pagination
           className='myPage'
-          total={this.state.images.length}
+          total={this.props.images.length}
           onChange={e => {
             this.handleChange(e)
           }}
