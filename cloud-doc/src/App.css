@@ -1,0 +1,66 @@
+.icon-button {
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+.search-container {
+  height: 38px;
+}
+
+.search-title {
+  font-size: 20px;
+}
+
+.c-link {
+  cursor: pointer;
+}
+
+.file-item {
+  height: 55px;
+  width: 100%;
+}
+
+.left-panel {
+  height: 100vh;
+}
+
+.mr-2 {
+  margin-right: 8px;
+}
+
+.bottom-btn {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: inherit;
+}
+
+.btm-btn {
+  width: 100%;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.btn-block {
+  flex: 1;
+}
+
+.left-panel {
+  padding: 0 !important;
+}
+
+.start-page {
+  font-size: 30px;
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+  color: #ccc;
+}
+
+.file-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

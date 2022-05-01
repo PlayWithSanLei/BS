@@ -1,0 +1,17 @@
+.login-panel {
+  transform: translateY(30vh);
+  width: 400px;
+}
+
+.button-panel {
+  display: flex;
+  justify-content: space-evenly;
+  .btn {
+    width: 80px;
+  }
+}
+
+.panel-heading {
+  text-align: center;
+  font-size: 28px !important;
+}
