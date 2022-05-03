@@ -25,6 +25,10 @@ class Signup extends React.Component {
     this.setState({[inputName]: inputValue})
   }
 
+  back () {
+      this.props.history.push('/login')
+  }
+
   onSubmit() {
     let loginInfo = {
       username: this.state.username,
@@ -84,6 +88,7 @@ class Signup extends React.Component {
                 />
               </div>
               <div className='button-panel'>
+                <button className="btn" name='login' onClick={e => this.back(e)}>返回</button>
                 <button className="btn btn-warning" name='login' onClick={e => this.onSubmit(e)}>注册</button>
               </div>
             </div>

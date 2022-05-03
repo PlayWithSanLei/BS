@@ -1,6 +1,6 @@
 import React from "react";
 import './index.css';
-import { Modal, Checkbox, Image, Pagination, Button, Table, Radio } from "antd";
+import { Modal, Checkbox, Image, Pagination, Button, Table } from "antd";
 import $ from 'jquery'
 
 const CheckboxGroup = Checkbox.Group;
@@ -13,7 +13,6 @@ class MyImage extends React.Component {
       images: props.images,
       image: props.image,
       size: 12,
-      sizeOptions: ['12', '24', '50'],
       e: 1,
       indeterminate: true,
       checkedList: [],
@@ -112,10 +111,16 @@ class MyImage extends React.Component {
     alert('后台下载中，请稍后...')
     for (let i = 0; i < checkedList.length; i++) {
       const url = '101.43.156.185:8080/objects/' + checkedList[i]
-      child_process.exec('curl -vv ' + url + ' --output /Users/zhanghao/DownIMG/' + checkedList[i], (_error, _stdin, stdout) => {
+      // eslint-disable-next-line no-loop-func
+      child_process.exec('curl -vv ' + url + ' --output /Users/zhanghao/DownIMG/' 
+      // eslint-disable-next-line no-loop-func
+      + checkedList[i], (_error, _stdin, stdout) => {
         if (stdout) {
           console.log(stdout)
-          alert('下载完成，文件位于：' + '/Users/zhanghao/DownIMG/' + checkedList[i] + '\n' + '已完成（' + flag++ + '/' + checkedList.length + '）')
+          // eslint-disable-next-line no-useless-concat
+          alert('下载完成，文件位于：' + '/Users/zhanghao/DownIMG/' 
+          // eslint-disable-next-line no-useless-concat
+          + checkedList[i] + '\n' + '已完成（' + flag++ + '/' + checkedList.length + '）')
         }
       })
     }

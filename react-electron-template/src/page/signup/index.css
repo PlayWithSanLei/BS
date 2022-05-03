@@ -1,0 +1,35 @@
+.login-panel {
+    transform: translateY(30vh);
+    width: 400px;
+    margin: auto;
+    border-radius: 12px;
+    background-color: rgba(255,255,255,.6) !important;
+    border: none !important;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px #333;
+    border-radius: 8px !important;
+  }
+  
+  .button-panel {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .button-panel .btn {
+    width: 80px;
+  }
+  
+  .panel-heading {
+    text-align: center;
+    font-size: 28px !important;
+    background-color: transparent !important;
+  }
+  
+  .panel-body {
+    border: none !important;
+  }
+  
+  body {
+    /* background: url('./background.jpeg') no-repeat !important; */
+    /* background-size: 100% 100% !important; */
+  }

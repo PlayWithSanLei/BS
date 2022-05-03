@@ -196,6 +196,7 @@ class UploadControl extends React.Component {
     return (
       <div id='page-wrapper'>
         <PageTitle title='数据上云' />
+        <p>上传图像之前您可以选择压缩工具对图像进行压缩，预计将减小50%的体积</p>
         <form id='formId'>
           <Button type='warn' className='btn btn-primary' size='large' onClick={() => this.compress()} style={{marginRight: '8px'}}>压缩工具</Button>
           <input type="file" className="btn btn-warning" onChange={e => this.inputChange(e)} style={{display: 'inline'}} />

@@ -21,7 +21,6 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route path='/change/upload' component={UploadControl}/>
-          <Route path='/change/download' component={Download}/>
           <Route path='/map' component={Map}/>
           <Route component={ErrorPage}/>
         </Switch>
