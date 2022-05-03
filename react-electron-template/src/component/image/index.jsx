@@ -176,6 +176,38 @@ class MyImage extends React.Component {
         }
         console.log(res)
         this.setState({ hisDataSource: res })
+      }).catch(err => {
+        const res = [
+          {
+            key: 0,
+            name: 'eason.jpeg',
+            version: 1,
+            size: 27236384,
+            location: ['31.11,114.11', '38.12,114.11', '38.12,119.12', '31.11,119.12']
+          },
+          {
+            key: 1,
+            name: 'eason.jpeg',
+            version: 2,
+            size: 27232384,
+            location: ['91.11,114.11', '38.12,114.11', '38.12,119.12', '91.11,119.12']
+          },
+          {
+            key: 2,
+            name: 'eason.jpeg',
+            version: 3,
+            size: 12236384,
+            location: ['34.11,114.11', '38.12,114.11', '38.12,119.12', '34.11,119.12']
+          },
+          {
+            key: 3,
+            name: 'eason.jpeg',
+            version: 4,
+            size: 52336384,
+            location: ['91.11,114.11', '38.12,114.11', '38.12,119.12', '91.11,119.12']
+          },
+        ]
+        this.setState({ hisDataSource: res })
       })
     }
 
@@ -264,7 +296,7 @@ class MyImage extends React.Component {
                   onCancel={() => this.handleHisCancel()}
                   okText='下载'
                   cancelText='取消'
-                  width='600px'
+                  width='650px'
                 >
                   <Table
                     dataSource={hisDataSource}
