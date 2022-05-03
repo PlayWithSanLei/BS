@@ -57,7 +57,7 @@ class MUtil {
     if (data) {
       return JSON.parse(data)
     } else {
-      return ''
+      return null
     }
   }
 

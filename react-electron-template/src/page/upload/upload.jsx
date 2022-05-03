@@ -3,7 +3,7 @@ import './index.css'
 import MUtil from '../../util/mm.jsx'
 import $ from 'jquery'
 import PageTitle from "../../component/page-title/index.jsx";
-import {Button, Input} from 'antd'
+import { Button, Input } from 'antd'
 const child_process = window.require('child_process');
 
 const _mm = new MUtil()
@@ -162,7 +162,7 @@ class UploadControl extends React.Component {
     alert('上传中，请稍后！')
     // const url = 'http://101.43.156.185:8080/objects/' + fileName
     let loc = location.split(' ')
-    
+
     loc = JSON.stringify(loc)
     $.ajax({
       url: '/objects/' + fileName,
@@ -178,9 +178,18 @@ class UploadControl extends React.Component {
     })
   }
 
-  handleChange (e) {
+  handleChange(e) {
     console.log(e.target.value)
-    this.setState({location: e.target.value})
+    this.setState({ location: e.target.value })
+  }
+
+  compress () {
+    // 调用python的压缩算法
+    child_process.exec('python3 ./public/compress.py', (a, b, c) => {
+      console.log('a', a)
+      console.log('b', b)
+      console.log('c', c)
+    })
   }
 
   render() {
@@ -188,11 +197,12 @@ class UploadControl extends React.Component {
       <div id='page-wrapper'>
         <PageTitle title='数据上云' />
         <form id='formId'>
-          <input type="file" className="btn btn-warning" onChange={e => this.inputChange(e)} />
+          <Button type='warn' className='btn btn-primary' size='large' onClick={() => this.compress()} style={{marginRight: '8px'}}>压缩工具</Button>
+          <input type="file" className="btn btn-warning" onChange={e => this.inputChange(e)} style={{display: 'inline'}} />
           <img id='img' />
-          <div id='put' style={{display: 'none'}}>
+          <div id='put' style={{ display: 'none' }}>
             <p>请输入图像的四个角的坐标，分别是(左上 右上 右下 左下)，经纬度用英文逗号隔开，不同经纬度之间使用空格分割</p>
-            <Input type="text" value={this.state.location} onChange={e => {this.handleChange(e)}} placeholder='请输入坐标信息, 例如31.11,114.11 38.12,114.11 38.12,119.12 31.11,119.12' style={{margin: '0 8px 0 0', width: '40em'}}/>
+            <Input type="text" value={this.state.location} onChange={e => { this.handleChange(e) }} placeholder='请输入坐标信息, 例如31.11,114.11 38.12,114.11 38.12,119.12 31.11,119.12' style={{ margin: '0 8px 0 0', width: '40em' }} />
             <Button type='primary' className='btn btn-primary' onClick={() => this.put()}>上传</Button>
 
           </div>

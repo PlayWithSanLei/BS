@@ -1,6 +1,7 @@
 .login-panel {
   transform: translateY(30vh);
   width: 400px;
+  margin: auto
 }
 
 .button-panel {

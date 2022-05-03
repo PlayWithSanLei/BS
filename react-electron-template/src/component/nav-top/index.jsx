@@ -10,8 +10,12 @@ class NavTop extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: _mm.getStorage('userInfo').username || ''
+      username: _mm.getStorage('userInfo')?.username || window.localStorage.getItem('username')
     }
+  }
+
+  componentDidMount () {
+
   }
 
   render() {
@@ -52,7 +56,8 @@ class NavTop extends React.Component {
       _mm.removeStorage('userInfo')
       window.location.href = '/login'
     }, errMsg => {
-      _mm.errorTips(errMsg)
+      _mm.removeStorage('userInfo')
+      window.location.href = '/login'
     })
   }
 }

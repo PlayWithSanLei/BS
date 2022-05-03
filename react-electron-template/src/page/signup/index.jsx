@@ -1,24 +1,22 @@
 import React from "react";
 import './index.css'
-import User from '../../service/user-service.jsx'
 import MUtil from "../../util/mm.jsx";
 
-const _user = new User()
 const _mm = new MUtil()
 
-class Login extends React.Component {
+class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
-      redirect: _mm.getUrlParam('redirect') || '/',
-      signup: '/signup'
+      repassword: '',
+      redirect: _mm.getUrlParam('redirect') || '/'
     }
   }
 
   componentDidMount() {
-    document.title = '登录-YGY'
+    document.title = '注册-YGY'
   }
 
   onInputChange(e) {
@@ -27,33 +25,31 @@ class Login extends React.Component {
     this.setState({[inputName]: inputValue})
   }
 
-  localCheck (loginInfo) {
-    const infos = _mm.getStorage('userInfos') || {}
-    if (infos.hasOwnProperty(loginInfo.username)) {
-      if (infos[loginInfo.username] === loginInfo.password) {
-        return true
-      }
-    }
-    return false
-  }
-
   onSubmit() {
     let loginInfo = {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      repassword: this.state.repassword
     }
-    if (this.localCheck(loginInfo)) {
-      this.props.history.push(this.state.redirect)
-      _mm.setStorage('username', loginInfo.username)
-      return 
+    if (loginInfo.username == '') {
+        alert('用户名不能为空')
+        return
+    } else if (loginInfo.password == '') {
+        alert('密码不能为空')
+        return
+    } else if (loginInfo.repassword == '') {
+        alert('确认密码不能为空')
+        return
+    } else if (loginInfo.password !== loginInfo.repassword) {
+        alert('两次密码输入不一致')
+        return
     }
-    let checkResult = _user.checkLoginInfo(loginInfo)
-    checkResult.status ? _user.login(loginInfo).then(res => {
-      _mm.setStorage('userInfo', res)
-      this.props.history.push(this.state.redirect)
-    }, (errMsg) => {
-      _mm.errorTips(errMsg)
-    }) : _mm.errorTips(checkResult.msg)
+    this.props.history.push('/login')
+    const userInfos = _mm.getStorage('userInfos') || {}
+    userInfos[loginInfo.username] = loginInfo.password
+    _mm.setStorage('userInfos', userInfos)
+    _mm.setStorage('userName', loginInfo.username)
+    alert('注册成功，请登录！')
   }
 
   onInputKeyup(e) {
@@ -62,15 +58,11 @@ class Login extends React.Component {
     }
   }
 
-  onSignup (e) {
-    this.props.history.push(this.state.signup)
-  }
-
   render() {
     return (
       <div className="col-md-4 col-md-offset-4">
         <div className="panel panel-default login-panel">
-          <div className="panel-heading">欢迎登录 - 遥感云</div>
+          <div className="panel-heading">注册用户 - 遥感云</div>
           <div className="panel-body">
             <div>
               <div className="form-group">
@@ -85,9 +77,14 @@ class Login extends React.Component {
                        onChange={e => this.onInputChange(e)} onKeyUp={e => this.onInputKeyup(e)}
                 />
               </div>
+              <div className="form-group">
+                <label>确认密码</label>
+                <input type="password" className="form-control" placeholder="RePassword" name='repassword'
+                       onChange={e => this.onInputChange(e)} onKeyUp={e => this.onInputKeyup(e)}
+                />
+              </div>
               <div className='button-panel'>
-                <button className="btn btn-primary" name='signup' onClick={e => this.onSignup(e)}>注册</button>
-                <button className="btn btn-warning" name='login' onClick={e => this.onSubmit(e)}>登录</button>
+                <button className="btn btn-warning" name='login' onClick={e => this.onSubmit(e)}>注册</button>
               </div>
             </div>
           </div>
@@ -97,4 +94,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default Signup

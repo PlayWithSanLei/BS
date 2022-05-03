@@ -11,6 +11,7 @@ import UploadControl from "./page/upload/upload.jsx";
 import Download from "./page/download/download.jsx";
 import Map from "./page/map/index.jsx";
 import './App.css';
+import Signup from "./page/signup/index.jsx";
 const { electron } = window;
 console.log(electron)
 class App extends React.Component {
@@ -30,6 +31,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path='/login' component={Login}/>
+          <Route path='/signup' component={Signup}/>
           <Route path='/' render={(props) => layoutRouter}/>
         </Switch>
       </Router>

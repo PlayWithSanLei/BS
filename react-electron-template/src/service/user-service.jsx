@@ -15,7 +15,7 @@ class User {
   logout() {
     return _mm.request({
       type: 'post',
-      url: '/user/logout.do'
+      url: 'http://admintest.happymmall.com/manage/user/logout.do'
     })
   }
 
