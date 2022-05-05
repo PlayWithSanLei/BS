@@ -12,11 +12,6 @@ class UploadControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      previewVisible: false,
-      previewImage: '',
-      previewTitle: '',
-      fileList: [],
-      postFiles: [],
       location: ''
     };
   }
@@ -200,7 +195,7 @@ class UploadControl extends React.Component {
         <form id='formId'>
           <Button type='warn' className='btn btn-primary' size='large' onClick={() => this.compress()} style={{marginRight: '8px'}}>压缩工具</Button>
           <input type="file" className="btn btn-warning" onChange={e => this.inputChange(e)} style={{display: 'inline'}} />
-          <img id='img' />
+          <img id='img' style={{display: 'block'}}/>
           <div id='put' style={{ display: 'none' }}>
             <p>请输入图像的四个角的坐标，分别是(左上 右上 右下 左下)，经纬度用英文逗号隔开，不同经纬度之间使用空格分割</p>
             <Input type="text" value={this.state.location} onChange={e => { this.handleChange(e) }} placeholder='请输入坐标信息, 例如31.11,114.11 38.12,114.11 38.12,119.12 31.11,119.12' style={{ margin: '0 8px 0 0', width: '40em' }} />
