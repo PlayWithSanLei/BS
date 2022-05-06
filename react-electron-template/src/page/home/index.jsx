@@ -50,8 +50,6 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log('home', this.state.image)
-    console.log('home', this.state.images)
     return (
       <div id='page-wrapper'>
         <PageTitle title='我的文件' />

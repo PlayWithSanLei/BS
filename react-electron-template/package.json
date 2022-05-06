@@ -1,8 +1,8 @@
 {
-  "name": "electron-example",
+  "name": "YaoGanCloud",
   "version": "0.1.0",
   "private": true,
-  "Dev": true,
+  "Dev": false,
   "Devtool": true,
   "homepage": "./",
   "main": "main.js",
@@ -31,7 +31,6 @@
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
-    "electron": "^12.0.2",
     "eslint": "^7.11.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -86,7 +85,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\""
+    "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
+    "pack": "electron-builder --dir",
+    "builder": "electron-builder"
   },
   "eslintConfig": {
     "extends": [
@@ -109,10 +110,46 @@
   "devDependencies": {
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
+    "electron-builder": "^23.0.3",
     "react-router-dom": "^4.2.2",
     "wait-on": "^6.0.1",
     "worker-loader": "^3.0.8",
-    "worker-plugin": "^5.0.1"
+    "worker-plugin": "^5.0.1",
+    "electron": "^12.0.2"
+  },
+  "build": {
+    "appId": "iden.client",
+    "asar": true,
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis"
+        }
+      ],
+      "icon": "./logo.ico",
+      "asarUnpack": [
+        "src/**",
+        "README.md"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./logo.ico",
+      "uninstallerIcon": "./logo.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "files": [
+      "build/**/*",
+      "main.js",
+      "preload.js"
+    ]
   },
   "jest": {
     "roots": [
